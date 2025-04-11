@@ -1,36 +1,47 @@
-const { envList } = require("../../envList");
-const { QuickStartPoints, QuickStartSteps } = require("./constants");
+const db = wx.cloud.database()
 
 Page({
   data: {
-    knowledgePoints: QuickStartPoints,
-    steps: QuickStartSteps,
+    categories: [],
+    dishes: [],
+    activeCatIndex: 0,
+    loading: true
   },
 
-  copyCode(e) {
-    const code = e.target?.dataset?.code || '';
-    wx.setClipboardData({
-      data: code,
-      success: () => {
-        wx.showToast({
-          title: '已复制',
-        })
-      },
-      fail: (err) => {
-        console.error('复制失败-----', err);
-      }
-    })
+  async onLoad() {
+    await this.loadCategories()
+    this.loadDishes()
+  },
+  
+
+  async loadCategories() {
+    const { data } = await db.collection('categories').get()
+    if (!data.length) {
+      wx.showToast({ title: '无分类数据', icon: 'none' })
+      return
+    }
+    this.setData({ categories: data, activeCatIndex: 0 })
+  },
+  
+
+  async loadDishes() {
+    const cat = this.data.categories[this.data.activeCatIndex]
+    if (!cat) return  // 防止异常
+  
+    const { data } = await db.collection('dishes')
+      .where({ categoryId: cat._id })
+      .get()
+    this.setData({ dishes: data })
+  },
+  
+
+  onTabChange: function (e) {
+    this.setData({ activeCatIndex: e.detail.index })
+    this.loadDishes()
   },
 
-  discoverCloud() {
-    wx.switchTab({
-      url: '/pages/examples/index',
-    })
-  },
-
-  gotoGoodsListPage() {
-    wx.navigateTo({
-      url: '/pages/goods-list/index',
-    })
-  },
-});
+  onAddCart: function (e) {
+    const dish = e.currentTarget.dataset.dish
+    wx.showToast({ title: `已加入 ${dish.name}`, icon: 'success' })
+  }
+})

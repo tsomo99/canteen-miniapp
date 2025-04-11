@@ -1,1 +1,5 @@
 .DS_Store\nnode_modules\n/miniprogram/npm\ncloudfunctions/*/node_modules
+miniprogram/miniprogram_npm/
+node_modules/
+cloudfunctions/*/node_modules/
+cloudfunctions/*/dist/
