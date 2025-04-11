@@ -1,47 +1,24 @@
-const db = wx.cloud.database()
+const cart = require('../../store/cart')
 
 Page({
   data: {
-    categories: [],
-    dishes: [],
-    activeCatIndex: 0,
-    loading: true
+    dishes: []
   },
 
-  async onLoad() {
-    await this.loadCategories()
+  onLoad() {
     this.loadDishes()
   },
-  
-
-  async loadCategories() {
-    const { data } = await db.collection('categories').get()
-    if (!data.length) {
-      wx.showToast({ title: '无分类数据', icon: 'none' })
-      return
-    }
-    this.setData({ categories: data, activeCatIndex: 0 })
-  },
-  
 
   async loadDishes() {
-    const cat = this.data.categories[this.data.activeCatIndex]
-    if (!cat) return  // 防止异常
-  
-    const { data } = await db.collection('dishes')
-      .where({ categoryId: cat._id })
-      .get()
-    this.setData({ dishes: data })
-  },
-  
-
-  onTabChange: function (e) {
-    this.setData({ activeCatIndex: e.detail.index })
-    this.loadDishes()
+    const db = wx.cloud.database()
+    const res = await db.collection('dishes').get()
+    this.setData({ dishes: res.data })
   },
 
-  onAddCart: function (e) {
+  onAddCart(e) {
     const dish = e.currentTarget.dataset.dish
-    wx.showToast({ title: `已加入 ${dish.name}`, icon: 'success' })
+    cart.add(dish)
+    wx.setTabBarBadge({ index: 1, text: String(cart.totalCount()) })
+    wx.showToast({ title: '已加入购物车', icon: 'success' })
   }
 })

@@ -1,3 +1,5 @@
+
+const cart = require('./store/cart')
 // app.js
 App({
   onLaunch: function () {
@@ -14,6 +16,8 @@ App({
       });
     }
 
-    this.globalData = {};
+    const cart = require('./store/cart')
+    cart.load()
+    this.globalData = { cart }
   },
 });

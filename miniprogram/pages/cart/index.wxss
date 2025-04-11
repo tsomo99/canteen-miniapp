@@ -1,1 +1,51 @@
-/* pages/cart/index.wxss */
+.page {
+  padding: 20rpx;
+}
+
+.cart-item {
+  display: flex;
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+
+.thumb {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.price {
+  color: #fa541c;
+}
+
+.count {
+  font-size: 28rpx;
+  color: #888;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.1);
+}

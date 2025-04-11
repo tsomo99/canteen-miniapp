@@ -1,25 +1,10 @@
-<view class="page">
-  <!-- 分类 Tabs -->
-  <van-tabs active="{{activeCatIndex}}" bind:change="onTabChange" swipe-threshold="5">
-    <block wx:for="{{categories}}" wx:key="_id">
-      <van-tab title="{{item.name}}" />
-    </block>
-  </van-tabs>
-
-  <!-- 骨架屏（加载中） -->
-  <van-loading wx:if="{{loading}}" size="24px" vertical>加载中</van-loading>
-
-  <!-- 菜品列表 -->
+<view class="dish-list">
   <view wx:for="{{dishes}}" wx:key="_id" class="dish-card">
-    <van-card
-      thumb="{{item.img}}"
-      lazy-load
-      title="{{item.name}}"
-      desc="月售 {{item.sold}} 份"
-      price="{{item.price}}"
-      currency="¥"
-      bind:click="onAddCart"
-      data-dish="{{item}}"
-    />
+    <image class="thumb" src="{{item.img}}" mode="aspectFill" lazy-load />
+    <view class="info">
+      <text class="name">{{item.name}}</text>
+      <text class="price">¥{{item.price}}</text>
+    </view>
+    <button class="add-btn" data-dish="{{item}}" bindtap="onAddCart">加入</button>
   </view>
 </view>

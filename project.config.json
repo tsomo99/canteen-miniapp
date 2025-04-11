@@ -34,7 +34,7 @@
     "useCompilerPlugins": false,
     "useNpmModule": true,
     "compileHotReLoad": true,
-    "packNpmManually": true,
+    "packNpmManually": false,
     "packNpmRelationList": [],
     "minified": true,
     "useTypescript": true

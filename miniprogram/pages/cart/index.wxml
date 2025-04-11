@@ -1,2 +1,18 @@
-<!--pages/cart/index.wxml-->
-<text>pages/cart/index.wxml</text>
+<view class="page">
+  <block wx:for="{{list}}" wx:key="_id">
+    <view class="cart-item">
+      <image class="thumb" src="{{item.img}}" mode="aspectFill" />
+      <view class="info">
+        <text class="name">{{item.name}}</text>
+        <text class="price">¥{{item.price}}</text>
+        <text class="count">x {{item.count}}</text>
+      </view>
+    </view>
+  </block>
+
+  <view class="bottom-bar">
+    <text>共 {{totalCount}} 件</text>
+    <text>合计：¥{{totalPrice}}</text>
+    <button type="primary" bindtap="onCheckout">去结算</button>
+  </view>
+</view>
