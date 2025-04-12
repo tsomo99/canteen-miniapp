@@ -1,0 +1,21 @@
+.success {
+  padding: 80rpx;
+  text-align: center;
+}
+.icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+}
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.sub {
+  margin: 20rpx 0 60rpx;
+  color: #666;
+}
+button {
+  width: 60%;
+  font-size: 32rpx;
+}

@@ -1,0 +1,15 @@
+<view class="page">
+  <block wx:for="{{list}}" wx:key="_id">
+    <view class="item">
+      <text class="name">{{item.name}}</text>
+      <text class="count">x{{item.count}}</text>
+      <text class="price">¥{{item.price}}</text>
+    </view>
+  </block>
+
+  <view class="total">
+    共 {{totalCount}} 件，总计 ¥{{totalPrice}}
+  </view>
+
+  <button type="primary" bindtap="onSubmit">提交订单</button>
+</view>

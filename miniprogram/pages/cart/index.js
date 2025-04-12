@@ -1,3 +1,4 @@
+
 const cart = require('../../store/cart')
 
 Page({
@@ -32,3 +33,4 @@ Page({
     wx.navigateTo({ url: '/pages/confirm/index' }) // 下一阶段页
   }
 })
+
