@@ -1,3 +1,4 @@
+const { clear } = require('../../store/cart')
 const cart = require('../../store/cart')
 
 Page({
@@ -22,27 +23,32 @@ Page({
   },
 
   async onSubmit() {
-    wx.showLoading({ title: '下单中…', mask: true })
-
+    wx.showLoading({ title: '下单中…' })
+    
+    const cartItems = this.data.list
+    const totalPrice = this.data.totalPriceFen / 100
+  
     const res = await wx.cloud.callFunction({
       name: 'addOrder',
-      data: {
-        cartItems: this.data.list,
-        totalPrice: Number(this.data.totalPrice)
-      }
+      data: { cartItems, totalPrice }
     })
-
+  
     wx.hideLoading()
-
+  
     if (res.result.ok) {
       cart.data.items = {}
       cart.save()
       wx.removeTabBarBadge({ index: 1 })
+
       wx.redirectTo({
         url: `/pages/order-success/index?no=${res.result.orderNo}`
       })
     } else {
-      wx.showToast({ title: res.result.msg || '下单失败', icon: 'none' })
+      wx.showToast({
+        title: res.result.msg || '下单失败',
+        icon: 'none'
+      })
     }
   }
+  
 })

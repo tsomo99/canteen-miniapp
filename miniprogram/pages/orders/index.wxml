@@ -1,0 +1,27 @@
+<view class="tabs">
+  <text class="tab {{activeTab==0 ? 'active' : ''}}" data-index="0" bindtap="onTabChange">全部</text>
+  <text class="tab {{activeTab==1 ? 'active' : ''}}" data-index="1" bindtap="onTabChange">待处理</text>
+  <text class="tab {{activeTab==2 ? 'active' : ''}}" data-index="2" bindtap="onTabChange">已完成</text>
+</view>
+<view class="page">
+  <text>这里是「我的订单」列表</text>
+</view>
+<view wx:if="{{orders.length}}">
+  <block wx:for="{{orders}}" wx:key="orderNo">
+    <view class="order-card">
+      <view class="order-header">
+        <text>订单号：{{item.orderNo}}</text>
+        <text class="status {{item.status}}">{{item.status == 'PENDING' ? '待处理' : '已完成'}}</text>
+      </view>
+      <view class="order-body">
+        <text>共 {{item.totalCount}} 件商品</text>
+        <text>合计：¥{{item.totalPrice}}</text>
+      </view>
+      <view class="order-time">{{item.timeStr}}</view>
+    </view>
+  </block>
+</view>
+
+<view wx:else class="empty">
+  <text>暂无订单</text>
+</view>

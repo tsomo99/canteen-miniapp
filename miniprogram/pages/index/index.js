@@ -7,6 +7,7 @@ Page({
 
   onLoad() {
     this.loadDishes()
+    cart.syncBadge()
   },
 
   async loadDishes() {
@@ -20,5 +21,10 @@ Page({
     cart.add(dish)
     wx.setTabBarBadge({ index: 1, text: String(cart.totalCount()) })
     wx.showToast({ title: '已加入购物车', icon: 'success' })
+  },
+
+  onShow(){
+    cart.load()
+    cart.syncBadge()
   }
 })

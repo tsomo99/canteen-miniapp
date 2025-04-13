@@ -25,6 +25,5 @@ const store = {
       .reduce((s, i) => s + i.count * i.price, 0)
       .toFixed(2)
   }
-  
 }
 module.exports = store

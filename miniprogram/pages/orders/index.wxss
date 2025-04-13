@@ -1,0 +1,57 @@
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  background: #f8f8f8;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  color: #888;
+}
+.tab.active {
+  color: #333;
+  border-bottom: 4rpx solid #07c160;
+  font-weight: bold;
+}
+
+.order-card {
+  background: #fff;
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.04);
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.status {
+  font-size: 28rpx;
+}
+.status.PENDING {
+  color: #ff9900;
+}
+.status.DONE {
+  color: #07c160;
+}
+.order-body {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.order-time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+  text-align: right;
+}
+.empty {
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
+  padding: 100rpx 0;
+}

@@ -7,10 +7,13 @@ Page({
     totalCount: 0,
     totalPrice: '0.00'
   },
-
+  onLoad(){
+    this.syncBadge()
+  },
   onShow() {
     cart.load()
     this.refresh()
+    this.syncBadge()
   },
 
   refresh() {
@@ -31,6 +34,15 @@ Page({
       return
     }
     wx.navigateTo({ url: '/pages/confirm/index' }) // 下一阶段页
+  },
+  syncBadge() {
+    const count = this.totalCount()
+    if (count > 0) {
+      wx.setTabBarBadge({ index: 1, text: String(count) })
+    } else {
+      wx.removeTabBarBadge({ index: 1 })
+    }
   }
+  
 })
 
